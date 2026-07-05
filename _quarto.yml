@@ -1,0 +1,91 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - week01/*.qmd
+    - week02/*.qmd
+    - week03/*.qmd
+    - week04/*.qmd
+
+website:
+  title: "ENGR 102 Bridge — Review Sheets"
+  page-navigation: true
+  navbar:
+    left:
+      - text: "Start Here"
+        href: index.qmd
+      - text: "Week 1"
+        menu:
+          - text: "Day 1 — Output vs. Stored State"
+            href: week01/01_output_vs_state.qmd
+          - text: "Day 2 — Variables, Expressions, State"
+            href: week01/02_variables_expressions_state.qmd
+          - text: "Day 3 — Types, Casting, Truthiness"
+            href: week01/03_types_casting_truthiness.qmd
+          - text: "Day 4 — Comparisons & Boundaries"
+            href: week01/04_comparisons_boundaries.qmd
+          - text: "Day 5 — Boolean Combinations"
+            href: week01/05_boolean_combinations.qmd
+      - text: "Week 2"
+        menu:
+          - text: "Day 1"
+            href: week02/day1.qmd
+          - text: "Day 2"
+            href: week02/day2.qmd
+          - text: "Day 3"
+            href: week02/day3.qmd
+          - text: "Day 4"
+            href: week02/day4.qmd
+          - text: "Day 5"
+            href: week02/day5.qmd
+      - text: "Week 3"
+        menu:
+          - text: "Day 1"
+            href: week03/day1.qmd
+          - text: "Day 2"
+            href: week03/day2.qmd
+          - text: "Day 3"
+            href: week03/day3.qmd
+          - text: "Day 4"
+            href: week03/day4.qmd
+          - text: "Day 5"
+            href: week03/day5.qmd
+      - text: "Week 4"
+        menu:
+          - text: "Day 1"
+            href: week04/day1.qmd
+          - text: "Day 2"
+            href: week04/day2.qmd
+          - text: "Day 3"
+            href: week04/day3.qmd
+          - text: "Day 4"
+            href: week04/day4.qmd
+          - text: "Day 5"
+            href: week04/day5.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-overflow: wrap
+    df-print: kable
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=0.6in
+    fontsize: 10pt
+    colorlinks: true
+    code-block-bg: true
+
+# Do not execute code cells by default: most snippets are illustrative and some
+# (bare-expression examples) must be SHOWN without running. Individual cells can
+# opt in with `#| eval: true`.
+execute:
+  eval: false
+  echo: true
+  warning: false

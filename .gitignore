@@ -220,3 +220,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Quarto
+/_site/
+/.quarto/
+**/*.quarto_ipynb
+# Stray single-file render artifacts (use `quarto preview`/`render`, not per-file)
+**/*_files/
+**/*.html
+**/*.tex

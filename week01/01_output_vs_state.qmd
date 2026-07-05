@@ -1,0 +1,37 @@
+---
+title: "Day 1: What does a line of actually do for you?"
+subtitle: "Do stuff with stuff! Save it, display it, math it!"
+---
+
+## D1.1: Overview
+
+So, coding (roughly) allows you to write lines of variously levels of broken English to command a computer to do something for you. We can categorize these "somethings" into three categories:
+
+| Action | Example | What Happened |
+| --- | --- | --- |
+| Assign a value | `name = "Tony"` | The text `Tony` is stored in a memory space labelled `name` |
+| Do some evaluation | `print(math.sqrt(25))` | `print`s (outputs) the `sqrt` (square root) of 25 to the screen |
+| Set up something | `for i in range(5):` | Sets up a `for` loop |
+
+Now you don't need to understand what the examples mean (yet), but the point is, every line of code you write is either going to be assigning/resassigning values (manipulation), do something in the background (e.g. output to screen, do some math), or set up a large code chunk that does a task for you.
+
+## D1.2: Assigning a value
+
+Your device, whatever it may be, requires memory (space so to say) to store information, just like how we save information into a Google Doc or a notebook or our brains. For pretty much every langauge I know of, this memory manipulation requires two pieces of information:
+
+1. What data are you storing?
+2. What do you want to name the memory space?
+
+Python needs to know what data to be storing into memory (1) in the first place, and how you would like to refer to the space of memory (2) so you can access it later. The two questions can get really specific depending on what language you are using (some languages will require you to designate the *amount* of memory to reserve or even the specific position). Thankfully, this process is simplified for you in Python: Python will deal with the messy details of where in memory to store something and how much to reserve.
+
+However, this begs the question, how exactly do we answer these questions to Python, and how do we tell Python specifically that we want some data saved?
+
+### D1.2.1: Assignment operator, `=`
+
+No, we are not giving Python homework (though I suspect some of you will be using Python to do your homework at some point). When we say assignment, we mean we are assigning a *value* to a label (which points to a memory space). You can think about it as placing some data into a jar with a label on it. A very basic example is the example I showed earlier:
+
+```{python}
+name = "Tony"
+```
+
+Notice that this line does not produce output. All that code does is store the text `Tony` into a chunk of memory that has been labeled as `name`. Python will not necessarily have an output for every line that you run: it will do *exactly* as it's been told, no more no less. If you require there to be some output for you to see, you must specify so using an appropriate command (that will be discussed later).
