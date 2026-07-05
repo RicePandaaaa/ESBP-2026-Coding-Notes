@@ -1,0 +1,15 @@
+<!-- Shared band legend. Pull into any sheet with:
+     {{< include _includes/band-legend.qmd >}}
+     Keeps the three recurring bands identical across all sheets. -->
+
+::: {.trap-band}
+⚠️ **Watch out** — <!-- TODO: the classic mistake for this topic -->
+:::
+
+::: {.check-band}
+✅ **Non-mutating check** — a *check* is `print(x)` or a bare `x`. **Never** an assignment.
+:::
+
+::: {.evidence-band}
+🔎 **Show your evidence** — <!-- TODO: predict / trace / test / debug / explain move for this topic -->
+:::

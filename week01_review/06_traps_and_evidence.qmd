@@ -1,0 +1,54 @@
+---
+title: "Traps & the Evidence Habit"
+subtitle: "The one-page cross-cutting review — highest value for exam prep"
+---
+
+<!-- ============================================================
+OUTLINE / SCAFFOLD. Consolidates every recurring misconception plus
+the "how to show evidence" method. Generic examples only.
+============================================================ -->
+
+## Master trap list
+
+<!-- TODO: one row per recurring Week 1 trap, with the fix. -->
+
+| # | Trap | Reality / fix |
+|---|---|---|
+| 1 | displayed ≠ stored | a bare expression shows a value but stores nothing |
+| 2 | planned ≠ current | nothing changes `current` until a line assigns to it |
+| 3 | cast mutates source | `float(t)` returns a new value; `t` is unchanged |
+| 4 | `+` adds strings | `"21.0" + "0.6"` → `"21.00.6"`, not `21.6` |
+| 5 | truthiness = meaning | `bool("False")` is `True`; use `== "reviewed"` |
+| 6 | inclusive vs. exclusive | the equals bar decides if the exact edge passes |
+| 7 | `and` vs. `or` | `and` = all-required; `or` = at-least-one |
+| 8 | `=` vs. `==` | `=` stores; `==` checks |
+
+## The non-mutating check rule (say it once)
+
+::: {.check-band}
+✅ **A check is `print(x)` or a bare `x`. Never an assignment.** If there's an `=` (not `==`), you changed state instead of checking it.
+:::
+
+## How to show evidence — one move per verb
+
+<!-- TODO: fill the "how" column with a concrete move. -->
+
+| Verb | What it proves | A concrete move |
+|---|---|---|
+| **predict** | you know the output | write the exact printed/displayed value |
+| **trace** | you track state | table of each variable after each line |
+| **test** | you probe edges | below / exact / above the boundary |
+| **debug** | you can fix a claim | name the wrong claim **and** the correction |
+| **explain / transfer** | you can decide | one plain sentence tying evidence to the decision |
+
+## Reusable condition-ledger template
+
+| Check | Source | Value | Connector | Effect |
+|---|---|---|---|---|
+| … | … | … | … | … |
+
+## Closeout sentence frame
+
+<!-- TODO: keep this frame for any readiness write-up. -->
+
+> "The record **is / is not** ready because ___ ; before closing, we need ___ ."

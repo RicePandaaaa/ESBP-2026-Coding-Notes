@@ -1,0 +1,70 @@
+---
+title: "Day 1 — Visible Output vs. Stored State"
+subtitle: "What the screen shows ≠ what is actually stored"
+---
+
+<!-- ============================================================
+OUTLINE / SCAFFOLD. Fill each section with GENERIC examples
+(reading, value, x) — never the graded speed_mps / flow_lpm data.
+Core question: "What does the screen show vs. what is stored?"
+============================================================ -->
+
+## The three things a line can do
+
+<!-- TODO: short table. Columns: Line looks like | What it does | Changes state? -->
+
+| Line | What it does | Changes stored state? |
+|---|---|---|
+| `x = 8.0` | **Assign** — store a value | ✅ yes |
+| `print(x)` | **Print** — send text to output | ❌ no |
+| `x + 0.5` (alone) | **Bare expression** — notebook *displays* the value | ❌ no |
+
+<!-- TODO: one sentence per row expanding on the table. -->
+
+## The headline trap: displayed ≠ stored
+
+<!-- TODO: explain the "Cell 2" idea — a value shown on screen is not the same
+     as a value stored in a variable. Prompt: "Where is the equals sign?" -->
+
+::: {.trap-band}
+⚠️ **Watch out** — a bare expression can *display* `8.5` while the variable still stores `8.0`. Screen evidence is not stored evidence.
+:::
+
+## Overwrite / reassignment
+
+<!-- TODO: reusing a name replaces the current value; order matters.
+     Example: x = 8.0 ; x = x + 0.5  → now x is 8.5. -->
+
+## Non-mutating check
+
+::: {.check-band}
+✅ **Non-mutating check** — to inspect state without changing it, use `print(x)` or a bare `x`. Never an assignment.
+:::
+
+## Worked state trace
+
+<!-- TODO: 4–5 line generic program, then a trace table.
+     Columns: After line | stored x | displayed | printed -->
+
+```{python}
+#| eval: false
+reading = 8.0        # assign
+reading + 0.5        # displays 8.5, stores nothing
+print(reading)       # prints 8.0
+reading = reading + 0.5   # NOW stored value changes
+print(reading)       # prints 8.5
+```
+
+| After line | stored `reading` | displayed | printed |
+|---|---|---|---|
+| `reading = 8.0` | 8.0 | — | — |
+| `reading + 0.5` | 8.0 | 8.5 | — |
+| `print(reading)` | 8.0 | — | 8.0 |
+| `reading = reading + 0.5` | 8.5 | — | — |
+| `print(reading)` | 8.5 | — | 8.5 |
+
+## Show your evidence
+
+::: {.evidence-band}
+🔎 **Show your evidence** — *trace* the stored value after every line; *predict* what each print shows; *debug* a claim like "the value became 8.5" by naming the exact line where storage actually changed.
+:::

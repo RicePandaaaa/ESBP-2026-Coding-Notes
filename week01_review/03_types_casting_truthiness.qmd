@@ -1,0 +1,68 @@
+---
+title: "Day 3 — Types, Casting, and Truthiness"
+subtitle: "What type is this, and what does converting it actually do?"
+---
+
+<!-- ============================================================
+OUTLINE / SCAFFOLD. Generic examples (reading_text, label, count).
+Core question: "What type is this, and what does a cast really do?"
+============================================================ -->
+
+## The three core types
+
+<!-- TODO: str (text in quotes), float/int (numbers), bool (True/False).
+     `type(x)` inspects the type without changing anything. -->
+
+| Value | Type |
+|---|---|
+| `"19.8"` | `str` |
+| `19.8` | `float` |
+| `0`, `21` | `int` |
+| `True`, `False` | `bool` |
+
+## Casting is non-mutating and returns a NEW value
+
+<!-- TODO: float(reading_text) produces a number but does NOT rewrite
+     reading_text (still a string). Headline misconception. -->
+
+::: {.trap-band}
+⚠️ **Watch out** — `float(reading_text)` returns a new number; it does **not** overwrite `reading_text`, which is still the string `"19.8"`.
+:::
+
+## The string concatenation trap
+
+<!-- TODO: "21.0" + "0.6" -> "21.00.6" (glued text), NOT 21.6.
+     Numeric addition needs float() on BOTH operands first. -->
+
+```{python}
+#| eval: true
+"21.0" + "0.6"      # -> '21.00.6'  (string concatenation, not math)
+```
+
+## Truthiness rules
+
+<!-- TODO: small reference table. Emphasize: truthiness reads
+     empty/non-empty (strings) and zero/nonzero (numbers) — NOT meaning. -->
+
+| Expression | Result | Why |
+|---|---|---|
+| `bool("reviewed")` | `True` | non-empty string |
+| `bool("False")` | `True` | **still** non-empty! |
+| `bool("")` | `False` | empty string |
+| `bool(0)` | `False` | zero |
+| `bool(3)` | `True` | nonzero |
+
+## Truthiness ≠ meaning ≠ approval
+
+<!-- TODO: bool("False") is True; approval needs an EXACT comparison
+     label == "reviewed", not bool(label). -->
+
+::: {.check-band}
+✅ **Non-mutating check** — `type(x)`, `float(x)`, `bool(x)` as bare expressions show a value/type without changing the source variable.
+:::
+
+## Show your evidence
+
+::: {.evidence-band}
+🔎 **Show your evidence** — *predict* value **and** type for each cast; *debug* the concatenation and truthiness traps by naming the produced value *and* the reason.
+:::

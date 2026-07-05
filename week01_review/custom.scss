@@ -1,0 +1,37 @@
+/*-- scss:defaults --*/
+// Week 1 review-sheet theme. Keep meaning off color alone (icons + words on
+// every band) so the sheets clear the Ally/Panorama >=95% accessibility bar.
+
+$font-size-root: 15px;
+$body-color: #1a1a1a;
+$link-color: #7a1616;   // maroon, matches instructor packet accents
+
+/*-- scss:rules --*/
+
+// Recurring band styling shared by every sheet.
+.trap-band,
+.check-band,
+.evidence-band {
+  border-left: 6px solid;
+  padding: 0.6rem 0.9rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.trap-band     { border-color: #b3261e; background: #fbeceb; }  // "Watch out"
+.check-band    { border-color: #1b6e2e; background: #eaf5ec; }  // non-mutating check
+.evidence-band { border-color: #1d4e89; background: #e9f0f8; }  // how to show evidence
+
+// Trace / worked tables: compact, print-stable.
+table {
+  font-size: 0.92em;
+  th { background: #eef1f4; }
+}
+
+// Keep each sheet to ~one printed page: tighten headings.
+h2 { margin-top: 1.4rem; }
+
+@media print {
+  .trap-band, .check-band, .evidence-band { break-inside: avoid; }
+  table { break-inside: avoid; }
+}

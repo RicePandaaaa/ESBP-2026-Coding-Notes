@@ -1,0 +1,46 @@
+---
+title: "Week 1 Glossary & Symbol Reference"
+subtitle: "Quick lookup — terms and operators"
+---
+
+<!-- ============================================================
+OUTLINE / SCAFFOLD. One-line definitions in student language.
+Optional sheet: use only if per-day sheets feel crowded.
+============================================================ -->
+
+## Terms
+
+<!-- TODO: one-line definition each, in plain language. -->
+
+| Term | Meaning (fill in) |
+|---|---|
+| variable | … |
+| assignment (`=`) | … |
+| expression | … |
+| bare expression | … |
+| `print()` vs. display | … |
+| state | … |
+| overwrite / reassignment | … |
+| current vs. planned value | … |
+| type (`str` / `int` / `float` / `bool`) | … |
+| cast (`float()`, `bool()`, `int()`, `str()`) | … |
+| truthiness | … |
+| comparison | … |
+| inclusive vs. exclusive boundary | … |
+| Boolean | … |
+| `and` / `or` / `not` | … |
+| non-mutating check | … |
+
+## Symbols
+
+| Symbol | Reads as | Note |
+|---|---|---|
+| `=` | "store into" | assignment — changes state |
+| `==` | "is equal to?" | comparison — returns `True`/`False` |
+| `!=` | "is not equal to?" | comparison |
+| `<` `<=` | less than / or equal | `<=` includes the edge |
+| `>` `>=` | greater than / or equal | `>=` includes the edge |
+
+::: {.check-band}
+✅ Remember: `=` changes state; `==` only checks it.
+:::

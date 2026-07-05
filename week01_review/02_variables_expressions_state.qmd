@@ -1,0 +1,64 @@
+---
+title: "Day 2 — Variables, Expressions, and State"
+subtitle: "Current value vs. planned value"
+---
+
+<!-- ============================================================
+OUTLINE / SCAFFOLD. Generic examples only (current, planned, gap).
+Core question: "What is the CURRENT value vs. the PLANNED value?"
+============================================================ -->
+
+## Current vs. planned state
+
+<!-- TODO: a `planned_*` variable holds a proposal; the current/recorded
+     variable only changes when an APPROVAL ASSIGNMENT copies planned -> current. -->
+
+## Assignment does not auto-propagate
+
+<!-- TODO: computing `planned = current + 2` leaves `current` unchanged
+     until `current = planned` runs. This is the central Day 2 idea. -->
+
+::: {.trap-band}
+⚠️ **Watch out** — a planned value does **not** become current on its own. Nothing changes `current` until a line literally assigns to it.
+:::
+
+## Expressions & the gap pattern
+
+<!-- TODO: derived values like `gap = target - current`.
+     Trap: a gap can be computed from a PLANNED input while the recorded
+     input is still old ("zero gap from planned, but current is stale"). -->
+
+## Checkpoint language / state history
+
+<!-- TODO: be able to say WHICH line made a value current —
+     "after planning" vs. "after approval/recording". -->
+
+::: {.check-band}
+✅ **Non-mutating check** — `print(current)` or a bare `current` to see the recorded value without changing it. Never an assignment.
+:::
+
+## Worked trace
+
+```{python}
+#| eval: false
+current = 8          # recorded value
+planned = current + 2   # proposal only
+# not approved yet
+current              # still 8
+current = planned    # approval assignment
+current              # now 10
+```
+
+<!-- TODO: trace table. Columns: After line | current | planned | gap | reason -->
+
+| After line | `current` | `planned` | reason |
+|---|---|---|---|
+| `current = 8` | 8 | — | baseline |
+| `planned = current + 2` | 8 | 10 | proposal computed; current not reassigned |
+| `current = planned` | 10 | 10 | approval makes planned current |
+
+## Show your evidence
+
+::: {.evidence-band}
+🔎 **Show your evidence** — *trace* current vs. planned after each line; *debug* a log claim by naming whether a value is "after planning" or "after approval"; *explain* why checkpoint language matters.
+:::

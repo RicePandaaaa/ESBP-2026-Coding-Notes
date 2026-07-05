@@ -1,0 +1,72 @@
+---
+title: "Day 4 — Comparisons and Boundaries"
+subtitle: "Is the value inside the limit — and is the boundary included?"
+---
+
+<!-- ============================================================
+OUTLINE / SCAFFOLD. Generic examples (value, limit, low, high).
+Core question: "Inside the limit? And is the exact edge included?"
+============================================================ -->
+
+## Comparison operators return Booleans
+
+| Operator | Meaning |
+|---|---|
+| `<`  | strictly less than |
+| `<=` | less than or equal (**includes** edge) |
+| `>`  | strictly greater than |
+| `>=` | greater than or equal (**includes** edge) |
+| `==` | equal to (a **check**, not assignment) |
+| `!=` | not equal to |
+
+## Inclusive vs. exclusive — the equals bar
+
+<!-- TODO: the central Day 4 idea. `>=`/`<=` include the exact boundary;
+     `>`/`<` exclude it. -->
+
+::: {.trap-band}
+⚠️ **Watch out** — at the exact edge, `>=`/`<=` are `True` but `>`/`<` are `False`. Reversing strict vs. inclusive is the #1 boundary error.
+:::
+
+## The just-below / exact / just-above triple
+
+<!-- TODO: clearest way to teach a boundary — show all three against one limit. -->
+
+```{python}
+#| eval: true
+limit = 20.4
+20.39 >= limit    # False (just below)
+20.40 >= limit    # True  (exact edge included)
+20.41 >= limit    # True  (above)
+```
+
+## `=` vs. `==`
+
+<!-- TODO: `==` compares and returns True/False; `=` stores. Contrast explicitly. -->
+
+## Type-safe comparisons
+
+<!-- TODO: comparing a string to a number ("21.6" <= 21.6) is unsafe /
+     TypeError-style — cast first with float(...). Ties back to Day 3. -->
+
+::: {.check-band}
+✅ **Non-mutating check** — a comparison like `value <= limit` on its own line just **reports** True/False; it stores nothing.
+:::
+
+## Separate evidence (sets up Day 5)
+
+<!-- TODO: compute low_ok and high_ok SEPARATELY on Day 4;
+     combining them with `and` is Day 5's job. -->
+
+| Expression | Result | Reason |
+|---|---|---|
+| `value >= low` | … | equality included by `>=` |
+| `value > low`  | … | equality excluded by `>` |
+| `value <= high`| … | equality included by `<=` |
+| `value < high` | … | equality excluded by `<` |
+
+## Show your evidence
+
+::: {.evidence-band}
+🔎 **Show your evidence** — *test* a boundary with the below/exact/above triple; *explain* each result in inclusive/exclusive language; *debug* a mixed string-vs-number comparison by naming the types.
+:::
