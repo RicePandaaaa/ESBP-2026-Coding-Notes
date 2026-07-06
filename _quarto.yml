@@ -14,7 +14,7 @@ website:
         href: index.qmd
       - text: "Week 1"
         menu:
-          - text: "Day 1 — Output vs. Stored State"
+          - text: "Day 1 — Humble Line of Code"
             href: week01/01_humble_line_of_code.qmd
 
 
