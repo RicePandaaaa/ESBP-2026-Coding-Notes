@@ -22,6 +22,13 @@ $link-color: #7a1616;   // maroon, matches instructor packet accents
 .check-band    { border-color: #1b6e2e; background: #eaf5ec; }  // non-mutating check
 .evidence-band { border-color: #1d4e89; background: #e9f0f8; }  // how to show evidence
 
+// Auto-label every band with an icon + word so band TYPE never depends on
+// color alone (red trap vs green check is invisible to red-green colorblind
+// readers). Rendered via CSS so authors can't forget it on new bands.
+.trap-band > p:first-child::before     { content: "⚠️ Watch out — "; font-weight: 700; }
+.check-band > p:first-child::before    { content: "✅ Check — "; font-weight: 700; }
+.evidence-band > p:first-child::before { content: "🔎 Evidence — "; font-weight: 700; }
+
 // Trace / worked tables: compact, print-stable.
 table {
   font-size: 0.92em;
