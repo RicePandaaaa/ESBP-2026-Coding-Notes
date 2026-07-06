@@ -229,3 +229,5 @@ __marimo__/
 **/*_files/
 **/*.html
 **/*.tex
+# pdf-link.html is a source include (referenced by _quarto.yml), not a render artifact
+!/pdf-link.html
