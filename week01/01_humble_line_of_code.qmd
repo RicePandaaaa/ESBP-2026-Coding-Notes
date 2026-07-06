@@ -3,7 +3,7 @@ title: "Day 1: What does a line of actually do for you?"
 subtitle: "Do stuff with stuff! Save it, display it, math it!"
 ---
 
-## 1.1: Overview
+## 1.1: Code Tasks
 
 So, coding (roughly) allows you to write lines of variously levels of broken English to command a computer to do something for you. We can categorize these "somethings" into three categories:
 
@@ -14,6 +14,12 @@ So, coding (roughly) allows you to write lines of variously levels of broken Eng
 | Set up something | `for i in range(5):` | Sets up a `for` loop |
 
 Now you don't need to understand what the examples mean (yet), but the point is, every line of code you write is either going to be assigning/resassigning values (manipulation), do something in the background (e.g. output to screen, do some math), or set up a large code chunk that does a task for you.
+
+### 1.1.1: Critical Thinking
+
+A huge part of coding revolves around your decision-making: *how* are you going to get something done, and *how* will you execute your plan. When you are either creating a program or reading someone else's code, you need to be constantly thinking both the big picture (what is the goal this code needs to accomplish) and the small picture (what is the task this line of code or chunk of code is doing). Written code may be *inefficient*, but extremely rarely is written code actually *useless*.
+
+Throughout this course and really through any sort of engineering process, always be considering what tasks need to be done and how you accomplish those tasks with the tools you are using.
 
 ## 1.2: Assigning a value
 
@@ -85,3 +91,17 @@ Python takes the left-hand side to be a *literal variable name*, but since an ex
 1 + 1 = 2
 ```
 :::
+
+## 1.4: `print` statement
+
+`print` is a built-in Python function (which will be explained more in detail later) that allows you to visually show values onto the screen (typically an output terminal). Whatever you want to display to the screen, you just put that inside the parentheses:
+
+```{python}
+print("Howdy, world!")
+```
+
+If you were to run this code, you would just see the text `Howdy, world!` be shown on the screen! Note that `print` will output any value, namely, anything that *simplifies* into a value. This means that outputting an expression is fair game:
+
+```{python}
+print(2000 + 25)
+```

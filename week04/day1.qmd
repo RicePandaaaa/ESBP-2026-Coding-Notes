@@ -1,6 +1,0 @@
----
-title: "Day 1"
-subtitle: "Week 4 — topic TBD"
----
-
-<!-- TODO: Week 4, Day 1 review sheet. Placeholder stub — replace with content. -->
