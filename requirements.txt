@@ -1,0 +1,8 @@
+# Python deps for rendering the Quarto site on Posit Connect Cloud.
+# Keep in sync with [project.dependencies] in pyproject.toml (which drives the
+# local uv-managed .venv). Connect Cloud only reads requirements.txt.
+jupyter>=1.1.1
+ipykernel>=7.3.0
+matplotlib>=3.11.0
+plotly>=6.8.0
+pyyaml>=6.0

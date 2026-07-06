@@ -31,7 +31,35 @@ table {
 // Keep each sheet to ~one printed page: tighten headings.
 h2 { margin-top: 1.4rem; }
 
+// Print / PDF styles. tools/make_pdfs.py prints each rendered page through
+// headless Chrome, so whatever this block says is exactly what the PDF is.
 @media print {
+  // Force browsers to keep background colors when printing / saving to PDF,
+  // otherwise the band fills and code-block backgrounds drop out to white.
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  // Site chrome has no business in a printed review sheet.
+  .navbar, #quarto-header, #quarto-sidebar, #quarto-margin-sidebar,
+  .page-navigation, #quarto-announcement, .quarto-secondary-nav,
+  .code-copy-button, .pdf-download-holder, .pdf-download-link,
+  #quarto-back-to-top, footer.footer {
+    display: none !important;
+  }
+
+  // Reclaim the space the sidebars occupied so text uses the full page width.
+  #quarto-content, #quarto-document-content, .page-columns {
+    display: block !important;
+    max-width: 100% !important;
+  }
+  main#quarto-document-content { margin: 0 !important; padding: 0 !important; }
+
+  // Images stay at their on-screen size (never blown up to page width).
+  img { max-width: 100% !important; height: auto; }
+  .figure img, .quarto-figure img { width: auto !important; }
+
+  // Keep logical units intact across page breaks.
   .trap-band, .check-band, .evidence-band { break-inside: avoid; }
   table { break-inside: avoid; }
+  pre, div.sourceCode { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
 }

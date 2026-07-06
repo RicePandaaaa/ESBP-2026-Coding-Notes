@@ -1,0 +1,157 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Day 1: What does a line of actually do for you?\"\n",
+        "subtitle: \"Do stuff with stuff! Save it, display it, math it!\"\n",
+        "---\n",
+        "\n",
+        "## 1.1: Overview\n",
+        "\n",
+        "So, coding (roughly) allows you to write lines of variously levels of broken English to command a computer to do something for you. We can categorize these \"somethings\" into three categories:\n",
+        "\n",
+        "| Action | Example | What Happened |\n",
+        "| --- | --- | --- |\n",
+        "| Assign a value | `name = \"Tony\"` | The text `Tony` is stored in a memory space labelled `name` |\n",
+        "| Do some evaluation | `print(math.sqrt(25))` | `print`s (outputs) the `sqrt` (square root) of 25 to the screen |\n",
+        "| Set up something | `for i in range(5):` | Sets up a `for` loop |\n",
+        "\n",
+        "Now you don't need to understand what the examples mean (yet), but the point is, every line of code you write is either going to be assigning/resassigning values (manipulation), do something in the background (e.g. output to screen, do some math), or set up a large code chunk that does a task for you.\n",
+        "\n",
+        "## 1.2: Assigning a value\n",
+        "\n",
+        "Your device, whatever it may be, requires memory (space so to say) to store information, just like how we save information into a Google Doc or a notebook or our brains. For pretty much every langauge I know of, this memory manipulation requires two pieces of information:\n",
+        "\n",
+        "1. What data are you storing?\n",
+        "2. What do you want to name the memory space?\n",
+        "\n",
+        "Python needs to know what data to be storing into memory (1) in the first place, and how you would like to refer to the space of memory (2) so you can access it later. The two questions can get really specific depending on what language you are using (some languages will require you to designate the *amount* of memory to reserve or even the specific position). Thankfully, this process is simplified for you in Python: Python will deal with the messy details of where in memory to store something and how much to reserve.\n",
+        "\n",
+        "However, this begs the question, how exactly do we answer these questions to Python, and how do we tell Python specifically that we want some data saved?\n",
+        "\n",
+        "### 1.2.1: Assignment operator, `=`\n",
+        "\n",
+        "No, we are not giving Python homework (though I suspect some of you will be using Python to do your homework at some point). When we say assignment, we mean we are assigning a *value* to a label (which points to a memory space). You can think about it as placing some data into a jar with a label on it. A very basic example is the example I showed earlier:"
+      ],
+      "id": "be9f04d1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "name = \"Tony\""
+      ],
+      "id": "abadd769",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Notice that this line does not produce output. All that code does is store the text `Tony` into a chunk of memory that has been labeled as `name`. Python will not necessarily have an output for every line that you run: it will do *exactly* as it's been told, no more no less. If you require there to be some output for you to see, you must specify so using an appropriate command (that will be discussed later).\n",
+        "\n",
+        "![Mock visual of the structure involving the label name, memory chunk, and value](./images/variable_diagram.png)\n",
+        "\n",
+        "::: {.trap-band}\n",
+        "**This is not an equality statement!** \n",
+        "\n",
+        "Comparisons of any sort have their own set of operators (symbols), and the `=` is not one of them despite its usage in mathematics to denote equality.\n",
+        ":::\n",
+        "\n",
+        "### 1.2.2: The variable\n",
+        "\n",
+        "This label is formally known as a *variable*. Variables are what you will be using to store data, whether it is a piece of data you create yourself or one that is derived from calculations.\n",
+        "\n",
+        "::: {.trap-band}\n",
+        "**Order matters!**\n",
+        "\n",
+        "The variable **must** be on the left-hand side of the assignment operator! Python always assumes whatever you write on the left-hand side to be the name of the variable you want to use, and whatever you write on the right-hand side to be the value.\n",
+        ":::\n",
+        "\n",
+        "Note that the variable simply stores data: it is not necessarily permanent. In other words, you can switch what value is being stored by assigning a *different* value to the same variable:"
+      ],
+      "id": "d0e04733"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "name = \"Adolin\""
+      ],
+      "id": "ce3f7c48",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now within `name` is the text value of `Adolin`. The old text is thrown away (by background processes you don't have to worry about) since nothing else is claiming the old text.\n",
+        "\n",
+        "<br/>\n",
+        "\n",
+        "![After assigning a new value to `name`, only the new value persists and the old value is forever gone](./images/overwriting_variable.png)\n",
+        "\n",
+        "## 1.3: Expressions\n",
+        "\n",
+        "So far, the right side has been a stand-alone value, namely (no pun intended) some text representing a name. However, the right-hand side is valid if whatever you write *evaluates* to a value:"
+      ],
+      "id": "9e827a70"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "total = 1 + 2"
+      ],
+      "id": "2e15c39d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that `1 + 2` does not really do anything by itself: it would create the value `3` and then the value would disappear since no code claims for anything else. Such code that evaluates (can be simplified) to a single value but does nothing if left alone in a line is what we call an *expression*. As long the right-hand side of an assignment operator is a valid expression, all will run well. There are some weird behaviors you may encounter depending on what you put on the right-hand side, but that is a discussion for later.\n",
+        "\n",
+        "::: {.trap-band}\n",
+        "**Expressions only belong on the right-hand side of an assignment operator!** \n",
+        "\n",
+        "Python takes the left-hand side to be a *literal variable name*, but since an expression itself is not a value (it has to be evaluated first), Python will not be happy with you! An example of this is shown below."
+      ],
+      "id": "ecd42637"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "1 + 1 = 2"
+      ],
+      "id": "932d86f4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::"
+      ],
+      "id": "31e39f39"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "E:\\ESBP-2026-Coding-Notes\\.venv\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
