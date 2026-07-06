@@ -88,20 +88,46 @@ Note that `1 + 2` does not really do anything by itself: it would create the val
 Python takes the left-hand side to be a *literal variable name*, but since an expression itself is not a value (it has to be evaluated first), Python will not be happy with you! An example of this is shown below.
 
 ```{python}
+#| eval: true
+#| error: true
 1 + 1 = 2
 ```
 :::
+
+Note that you can use variables in expressions as well. In these cases, Python will grab the *value* from the variables and use that for evaluation:
+
+```{python}
+#| eval: true
+a = 10
+b = 20
+
+total = a + b
+```
+
+The value stored within `total` is 30!
 
 ## 1.4: `print` statement
 
 `print` is a built-in Python function (which will be explained more in detail later) that allows you to visually show values onto the screen (typically an output terminal). Whatever you want to display to the screen, you just put that inside the parentheses:
 
 ```{python}
+#| eval: true
 print("Howdy, world!")
 ```
 
 If you were to run this code, you would just see the text `Howdy, world!` be shown on the screen! Note that `print` will output any value, namely, anything that *simplifies* into a value. This means that outputting an expression is fair game:
 
 ```{python}
+#| eval: true
 print(2000 + 25)
+```
+
+### 1.4.1: Printing variables
+
+Variables point to values, and so if you `print` a variable, you will see the *value* of that variable outputted onto the screen. For example, the following code will print out `Miss Reveille` onto the screen:
+
+```{python}
+#| eval: true
+mascot_name = "Miss Reveille"
+print(mascot_name)
 ```
