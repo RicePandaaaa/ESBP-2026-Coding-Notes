@@ -11,7 +11,8 @@ $link-color: #7a1616;   // maroon, matches instructor packet accents
 // Recurring band styling shared by every sheet.
 .trap-band,
 .check-band,
-.evidence-band {
+.evidence-band,
+.note-band {
   border-left: 6px solid;
   padding: 0.6rem 0.9rem;
   margin: 1rem 0;
@@ -21,6 +22,7 @@ $link-color: #7a1616;   // maroon, matches instructor packet accents
 .trap-band     { border-color: #b3261e; background: #fbeceb; }  // "Watch out"
 .check-band    { border-color: #1b6e2e; background: #eaf5ec; }  // non-mutating check
 .evidence-band { border-color: #1d4e89; background: #e9f0f8; }  // how to show evidence
+.note-band     { border-color: #ffe4c4; background: #fff8e7;}   // just a note
 
 // Auto-label every band with an icon + word so band TYPE never depends on
 // color alone (red trap vs green check is invisible to red-green colorblind
@@ -28,6 +30,7 @@ $link-color: #7a1616;   // maroon, matches instructor packet accents
 .trap-band > p:first-child::before     { content: "⚠️ Watch out — "; font-weight: 700; }
 .check-band > p:first-child::before    { content: "✅ Check — "; font-weight: 700; }
 .evidence-band > p:first-child::before { content: "🔎 Evidence — "; font-weight: 700; }
+.note-band > p:first-child::before     { content: "📝 Note — "; font-weight: 700; }
 
 // Trace / worked tables: compact, print-stable.
 table {
