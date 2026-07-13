@@ -8,3 +8,4 @@ title: "ENGR 102 Bridge - Review Sheets"
 |---|---|---|---|
 | [The humble line of code](week01/01_humble_line_of_code.qmd) | Assignment, variables, `print` | 1 | Week 1, Day 1 |
 | [Math and Modules](week01/02_basic_math.qmd) | Basic math operators and built-in modules | 2 | Week 1, Day 2 |
+| [Typecasting](week01/03_casting.qmd) | Type-casting and its rules | 3 | Week 1, Day 3 |

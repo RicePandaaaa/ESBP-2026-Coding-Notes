@@ -18,6 +18,8 @@ website:
             href: week01/01_humble_line_of_code.qmd
           - text: "Day 2 - Math and Modules"
             href: week01/02_basic_math.qmd
+          - text: "Day 3 - Data Types and Typecasting"
+            href: week01/03_casting.qmd
 
 
 format:
