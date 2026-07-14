@@ -1,0 +1,314 @@
+---
+title: "Day 6: Conditionals"
+subtitle: "if, elif, else"
+---
+
+## 6.1: Making the program decide
+
+Every program you have written so far runs straight through, top to bottom, executing every single line exactly once. That is fine for a calculator, but it is not how anything interesting works. Interesting programs *choose*.
+
+A **conditional** is how you tell Python "run this code, but only if something is true." You have already built everything you need: Day 4 gave you booleans and comparisons, Day 5 gave you `and`, `or`, and `not`. Today we finally get to *use* those answers.
+
+## 6.2: The `if` statement
+
+The simplest conditional is an `if` statement. Its shape is fixed:
+
+```{python}
+#| eval: true
+temperature = 95
+
+if temperature > 90:
+    print("It's hot out there!")
+```
+
+Look carefully at the anatomy, because every piece is mandatory:
+
+1. The keyword **`if`**.
+2. A **condition**, which is any expression that produces a boolean. Here it is `temperature > 90`.
+3. A **colon** (`:`) at the end of the line.
+4. An **indented block** of code underneath, which runs only when the condition is `True`.
+
+If the condition is `True`, the indented block runs. If it is `False`, Python skips the entire block and carries on with whatever comes after:
+
+```{python}
+#| eval: true
+temperature = 60
+
+if temperature > 90:
+    print("It's hot out there!")
+
+print("Have a nice day.")
+```
+
+The first `print` never happens, because `60 > 90` is `False`. The second one always happens, because it is not indented and therefore is not part of the `if`.
+
+### 6.2.1: Indentation is not decoration
+
+::: {.trap-band}
+**In Python, indentation is syntax.**
+
+In many other languages, curly braces `{ }` mark which lines belong to the `if`, and the indentation is purely cosmetic. Python has no braces. **The indentation itself is what tells Python which lines are inside the block.** Get it wrong and your program either crashes or, far worse, quietly does the wrong thing.
+
+Forget to indent at all, and Python cannot find the block it was promised:
+
+```{python}
+#| eval: true
+#| error: true
+if 5 > 3:
+print("hello")
+```
+
+Indent inconsistently within a block, and Python cannot tell where the block ends:
+
+```{python}
+#| eval: true
+#| error: true
+if 5 > 3:
+    print("first")
+      print("second")
+```
+:::
+
+The convention, which essentially all Python code follows, is **four spaces per level of indentation**. Any editor worth using will insert those for you when you press Tab after a line ending in a colon. Be consistent, and never mix tabs and spaces in the same file.
+
+Here is the quiet-wrong-answer version, which is the one that actually costs people hours:
+
+```{python}
+#| eval: true
+temperature = 60
+
+if temperature > 90:
+    print("It's hot!")
+print("Drink water!")
+```
+
+The "Drink water!" line prints even though it is cold, because it is not indented and so it was never part of the `if` at all. Python did exactly what you told it to. You just did not tell it what you meant.
+
+### 6.2.2: The condition can be anything truthy
+
+The condition does not have to be a comparison. It can be any expression, and Python will run `bool()` on whatever it gets, using the truthiness rules from Day 4:
+
+```{python}
+#| eval: true
+name = "Tony"
+
+if name:
+    print("We have a name!")
+```
+
+`"Tony"` is a non-empty string, which is truthy, so the block runs. Had `name` been `""`, it would be falsy and the block would be skipped. And of course the full arsenal from Day 5 is fair game:
+
+```{python}
+#| eval: true
+age = 20
+has_id = True
+
+if age >= 18 and has_id:
+    print("Welcome in.")
+```
+
+## 6.3: `else`
+
+An `if` on its own gives you one path: do the thing, or do nothing. Very often you want a genuine fork: do *this*, otherwise do *that*. That is what `else` is for.
+
+```{python}
+#| eval: true
+temperature = 60
+
+if temperature > 90:
+    print("It's hot out there!")
+else:
+    print("Not too bad today.")
+```
+
+`else` has no condition of its own. It cannot: its whole job is to catch everything the `if` did not. Note the syntax carefully. `else` is followed immediately by a colon, and its own indented block sits underneath.
+
+The guarantee `else` gives you is worth stating plainly: **exactly one of the two blocks will run.** Never both, never neither.
+
+::: {.trap-band}
+**`else` must be attached to an `if`**
+
+An `else` cannot stand on its own, and it must line up at the same indentation level as the `if` it belongs to. A floating `else` with no `if` above it is a syntax error:
+
+```{python}
+#| eval: true
+#| error: true
+else:
+    print("uh oh")
+```
+:::
+
+## 6.4: `elif`
+
+Two paths are often not enough. Suppose we want to grade a score: an A, a B, a C, or a failing grade. `elif` (short for "else if") lets you chain as many conditions as you like:
+
+```{python}
+#| eval: true
+score = 85
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 80:
+    print("Grade: B")
+elif score >= 70:
+    print("Grade: C")
+else:
+    print("Grade: F")
+```
+
+Python works its way down the chain from the top, and here is the rule that makes the whole thing tick:
+
+::: {.note-band}
+**Python takes the first branch that is `True`, and then stops.**
+
+It checks `if score >= 90`. That is `False` for a score of 85, so it moves on. It checks `elif score >= 80`. That is `True`, so it runs that block, and then it **skips every remaining `elif` and the `else` entirely**. It does not even look at them.
+
+At most **one** block in an `if`/`elif`/`else` chain will ever run. Once a branch is taken, the chain is finished.
+:::
+
+That "and then stops" behavior is what lets the grading example above be so short. Look at the second condition: `score >= 80`. On its own, that is true for a score of 95 as well. But a 95 never reaches it, because the `if` above already caught it and stopped the chain. Each condition only has to distinguish itself from the ones *below* it, because everything above has already been ruled out.
+
+### 6.4.1: Order matters enormously
+
+Because Python takes the first match, writing the chain in the wrong order silently breaks it:
+
+```{python}
+#| eval: true
+score = 95
+
+# WRONG: the loosest condition is first
+if score >= 70:
+    print("Grade: C")
+elif score >= 80:
+    print("Grade: B")
+elif score >= 90:
+    print("Grade: A")
+```
+
+A 95 gets a C. It is not a crash, and Python will never warn you: `95 >= 70` is genuinely `True`, so the first branch wins and the chain stops. The two better branches below never get a chance.
+
+When your conditions overlap, order them from **most specific to least specific**, or from strictest threshold to loosest.
+
+### 6.4.2: Where `elif` and `else` are allowed
+
+There are firm rules about which pieces can appear where:
+
+| Rule | Detail |
+| --- | --- |
+| Every chain starts with `if` | You cannot open with `elif` or `else`. |
+| `elif` is optional | You may have zero, one, or as many as you like. |
+| `else` is optional | You may have zero or one. Never two. |
+| `else` goes last | Nothing may follow it in the chain. |
+| `elif` must follow an `if` or another `elif` | It cannot come after the `else`. |
+
+So all of these are valid chains:
+
+```{python}
+# just an if
+if x > 0:
+    print("positive")
+
+# if / else
+if x > 0:
+    print("positive")
+else:
+    print("not positive")
+
+# if / elif, with no else at all
+if x > 0:
+    print("positive")
+elif x < 0:
+    print("negative")
+
+# the full house
+if x > 0:
+    print("positive")
+elif x < 0:
+    print("negative")
+else:
+    print("zero")
+```
+
+Notice the third example, `if`/`elif` with no `else`. That is perfectly legal, but it means that if `x` happens to be `0`, **nothing prints at all**. Leaving off the `else` is a real choice with a real consequence: you are saying "if none of these match, do nothing." Sometimes that is exactly right. Sometimes it is a bug you will spend an hour hunting.
+
+## 6.5: Separate `if`s are not the same as `elif`
+
+This is the distinction that separates people who understand conditionals from people who are guessing. Compare these two blocks very carefully:
+
+```{python}
+#| eval: true
+score = 95
+
+print("Using elif:")
+if score >= 90:
+    print("  A")
+elif score >= 80:
+    print("  B")
+elif score >= 70:
+    print("  C")
+
+print("Using separate ifs:")
+if score >= 90:
+    print("  A")
+if score >= 80:
+    print("  B")
+if score >= 70:
+    print("  C")
+```
+
+The `elif` version prints one line. The separate-`if` version prints three.
+
+The reason is exactly the rule from 6.4: an `elif` chain is *one* decision with several possible outcomes, and taking one branch ends it. But three separate `if` statements are *three independent decisions*, and Python dutifully evaluates every one of them. A score of 95 is genuinely `>= 90`, genuinely `>= 80`, and genuinely `>= 70`, so all three blocks run.
+
+::: {.note-band}
+**Which one do you want?**
+
+Ask yourself: are these choices *mutually exclusive*?
+
+- "What letter grade is this?" A score gets exactly one grade. That is one decision with many outcomes, so use `elif`.
+- "Should I pack a coat? Should I pack an umbrella? Should I pack sunscreen?" These are unrelated yes/no questions, and any combination of them could be true. Use separate `if` statements.
+:::
+
+## 6.6: Nesting
+
+The block under an `if` is just ordinary code, which means it can contain another `if`. This is called *nesting*, and each level gets its own layer of indentation:
+
+```{python}
+#| eval: true
+age = 20
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("Welcome in.")
+    else:
+        print("Come back with an ID.")
+else:
+    print("Too young, sorry.")
+```
+
+The inner `if`/`else` is *inside* the first block, so Python only even considers it once it knows `age >= 18` is `True`. Notice how the indentation is doing real work here: the inner `else` is indented to line up with the inner `if`, which is how Python knows it belongs to that one and not to the outer one.
+
+Nesting is a useful tool, but it gets hard to read fast. Whenever a nested `if` is just checking a second thing that also has to be true, the `and` from Day 5 will usually say it more clearly:
+
+```{python}
+#| eval: true
+age = 20
+has_id = True
+
+if age >= 18 and has_id:
+    print("Welcome in.")
+```
+
+That is not always a fair swap, because the nested version could give three distinct messages while this one gives two. But when you find yourself three or four levels deep, stop and ask whether a logical operator could flatten things out.
+
+## 6.7: The big picture
+
+- **`if`** runs its indented block only when its condition is `True`.
+- **`elif`** offers another condition, but Python only checks it if every condition above it was `False`.
+- **`else`** catches everything the branches above missed, and takes no condition of its own.
+- **At most one block in a chain runs.** The first `True` wins, and the chain stops.
+- **Indentation is what defines the block.** It is syntax, not style.
+- **Order your conditions from most specific to least**, or the loose ones will swallow the strict ones.
+
+With Day 4's booleans, Day 5's logic gates, and today's conditionals, your programs can finally look at their own data and decide what to do about it. That is a genuine step up from a calculator.

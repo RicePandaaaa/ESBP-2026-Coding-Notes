@@ -1,0 +1,229 @@
+---
+title: "Day 5: Logic Gates"
+subtitle: "and, or, not"
+---
+
+## 5.1: Combining booleans
+
+On Day 4 we learned that comparison operators hand us back a single `True` or `False`. That is enough to ask *one* question. But real decisions are rarely made from one question:
+
+- Can this student register? Only if they have passed the prerequisite **and** there is a seat open.
+- Should I bring an umbrella? If it is raining **or** the forecast says it might.
+- Is the door locked? I want to know when it is **not** unlocked.
+
+Python gives you three *logical operators* for exactly this. They take booleans as input and produce a boolean as output. They are often called **logic gates**, borrowing the name from the physical circuits inside a processor that do the very same thing.
+
+| Operator | Plain English | Result is `True` when... |
+| --- | --- | --- |
+| `and` | both | **both** sides are `True` |
+| `or` | either | **at least one** side is `True` |
+| `not` | flip it | the single value after it is `False` |
+
+Notice that these are words, not symbols. You write `and`, not `&&`. That is deliberate: Python leans hard on readability, and code like `age >= 18 and has_id` reads almost like a sentence.
+
+## 5.2: `and`
+
+`and` is the strict one. It demands that **everything** be true. If even one side fails, the whole thing is `False`.
+
+```{python}
+#| eval: true
+print(True and True)
+print(True and False)
+print(False and True)
+print(False and False)
+```
+
+Laid out as a table (a *truth table*, which is how engineers usually write these out):
+
+| Left | Right | `Left and Right` |
+| --- | --- | --- |
+| `True` | `True` | `True` |
+| `True` | `False` | `False` |
+| `False` | `True` | `False` |
+| `False` | `False` | `False` |
+
+Only one row out of four gives `True`. That is what "strict" means here.
+
+Of course, you almost never write `True and True` literally. The real use is gluing comparisons together:
+
+```{python}
+#| eval: true
+age = 20
+has_id = True
+
+print(age >= 18 and has_id)
+```
+
+Here the left side, `age >= 18`, evaluates to `True`, and the right side is already `True`, so the whole expression is `True`. Change the age to `16` and the left side becomes `False`, which drags the entire expression down to `False` no matter what `has_id` says.
+
+::: {.note-band}
+**Think of `and` as multiplication**
+
+If you picture `True` as `1` and `False` as `0` (which, as we saw on Day 4, is literally how Python stores them), then `and` behaves like multiplication. A single zero anywhere in a product makes the whole product zero. A single `False` anywhere in a chain of `and`s makes the whole thing `False`.
+:::
+
+## 5.3: `or`
+
+`or` is the generous one. It only needs **one** side to be `True`. It says `False` only when *everything* is false.
+
+```{python}
+#| eval: true
+print(True or True)
+print(True or False)
+print(False or True)
+print(False or False)
+```
+
+| Left | Right | `Left or Right` |
+| --- | --- | --- |
+| `True` | `True` | `True` |
+| `True` | `False` | `True` |
+| `False` | `True` | `True` |
+| `False` | `False` | `False` |
+
+Three rows out of four give `True`. This is the mirror image of `and`.
+
+```{python}
+#| eval: true
+is_weekend = False
+is_holiday = True
+
+print(is_weekend or is_holiday)
+```
+
+::: {.trap-band}
+**Python's `or` is not English's "or"**
+
+When a friend says "you can have soup or salad," they usually mean *one, not both*. Python's `or` does not mean that. `True or True` is `True`: having both is perfectly fine.
+
+Read Python's `or` as "at least one of these," and you will never get tripped up.
+:::
+
+## 5.4: `not`
+
+`not` is the odd one out. The other two operators sit *between* two values. `not` sits *in front of* a single value and flips it to the opposite:
+
+```{python}
+#| eval: true
+print(not True)
+print(not False)
+```
+
+| Value | `not Value` |
+| --- | --- |
+| `True` | `False` |
+| `False` | `True` |
+
+That's the entire operator. It is most useful for expressing "when this is *not* the case":
+
+```{python}
+#| eval: true
+is_locked = False
+
+print(not is_locked)
+```
+
+::: {.note-band}
+**`not` often has a shorter twin**
+
+`not (x == y)` is legal, but Python already gives you `!=` for that. Similarly, `not (x > y)` is just `x <= y`. When a comparison operator says it more directly, use the comparison operator. Save `not` for flipping a variable or a whole compound expression, which is where it really earns its keep.
+:::
+
+## 5.5: Order of operations
+
+Just like `*` binds tighter than `+` in arithmetic, the logical operators have a precedence order. From tightest to loosest:
+
+1. Comparison operators (`==`, `!=`, `<`, `>`, `<=`, `>=`)
+2. `not`
+3. `and`
+4. `or`
+
+Comparisons happening first is a genuine mercy, because it means this works exactly as you would hope:
+
+```{python}
+#| eval: true
+age = 20
+score = 85
+
+print(age >= 18 and score >= 80)
+```
+
+Python evaluates `age >= 18` to `True` and `score >= 80` to `True` *first*, and only then applies the `and`. You do not need parentheses around each comparison.
+
+The one that will actually bite you is `and` binding tighter than `or`. Consider:
+
+```{python}
+#| eval: true
+print(True or False and False)
+```
+
+The answer is `True`, and if you read it left to right like English you would expect `False`. Python does not read left to right here. It groups the `and` first, as though you had written `True or (False and False)`, which is `True or False`, which is `True`.
+
+### 5.5.1: Just use parentheses
+
+::: {.trap-band}
+**When in doubt, parenthesize.**
+
+You *can* memorize the precedence table. But even code that is technically correct becomes a trap for the next person who reads it (and the next person is usually you, three weeks later). Parentheses cost you two keystrokes and remove all ambiguity:
+
+```{python}
+#| eval: true
+# Hard to read: which grouping did the author actually intend?
+print(True or False and False)
+
+# Unmistakable
+print(True or (False and False))
+print((True or False) and False)
+```
+
+Those last two produce *different answers* from the same three values. The parentheses are the only thing telling you, and Python, which one you meant.
+:::
+
+Parentheses also let you build genuinely complex conditions without losing your mind. Suppose a student may register if they are a senior, **or** if they have both the prerequisite and instructor permission:
+
+```{python}
+#| eval: true
+is_senior = False
+has_prereq = True
+has_permission = True
+
+can_register = is_senior or (has_prereq and has_permission)
+print(can_register)
+```
+
+Notice we also stored the result in a well-named variable. `can_register` tells the reader what the tangle of logic *means*, which is worth far more than saving a line.
+
+## 5.6: A worked example
+
+Let's put all three operators together. A movie theater lets you into a late showing if you are 17 or older, *or* if you are with an adult. It refuses entry entirely if the show is sold out.
+
+```{python}
+#| eval: true
+age = 15
+with_adult = True
+sold_out = False
+
+old_enough = age >= 17
+allowed_in = (old_enough or with_adult) and not sold_out
+
+print(allowed_in)
+```
+
+Walk through it the way Python does, from the inside out:
+
+1. `age >= 17` is `15 >= 17`, which is `False`. So `old_enough` is `False`.
+2. `(old_enough or with_adult)` is `(False or True)`, which is `True`.
+3. `not sold_out` is `not False`, which is `True`.
+4. `True and True` is `True`.
+
+The patron gets in. Change `sold_out` to `True` and step through it again: the `not` flips it to `False`, and that `False` on one side of an `and` sinks the whole thing.
+
+## 5.7: The big picture
+
+Three operators, and you have seen all of them:
+
+- **`and`** needs everything to be `True`. One `False` ruins it.
+- **`or`** needs only one thing to be `True`. It fails only when everything is `False`.
+- **`not`** flips a single value to its opposite.
+
+Together with the comparison operators from Day 4, you can now express essentially any condition you can describe in words. The only thing missing is a way for the program to *do* something about the answer, and that is exactly what Day 6 is for.

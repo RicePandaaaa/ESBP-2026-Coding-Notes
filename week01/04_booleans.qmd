@@ -1,0 +1,242 @@
+---
+title: "Day 4: Booleans"
+subtitle: "The type with only two values"
+---
+
+## 4.1: What is a `bool`?
+
+Back on Day 3, we promised there was a fourth basic data type waiting in the wings. This is it. A *boolean* (type name: `bool`) is a value that answers a yes-or-no question. That's it. That's the whole type.
+
+Where an `int` can be any whole number and a `str` can be any text you can imagine, a `bool` has exactly **two** possible values:
+
+| Value | Meaning |
+| --- | --- |
+| `True` | yes / on / this holds |
+| `False` | no / off / this does not hold |
+
+That sounds almost uselessly simple, and yet booleans are the hinge that the rest of programming swings on. Every time your program has to *make a decision*, something underneath is quietly producing a `True` or a `False`.
+
+```{python}
+#| eval: true
+is_raining = True
+is_sunny = False
+
+print(is_raining)
+print(type(is_raining))
+```
+
+Notice the type comes back as `<class 'bool'>`, right alongside `str`, `int`, and `float` from Day 3. A boolean is a data type just like any other: you can store it in a variable, print it, and pass it around.
+
+### 4.1.1: `True` and `False` are keywords
+
+`True` and `False` are *keywords*, which means Python has reserved them and given them a specific meaning. Two things follow from that, and both of them bite beginners:
+
+::: {.trap-band}
+**Capitalization matters, and quotes change everything!**
+
+`True` and `False` must be written with a capital first letter and nothing else. `true`, `TRUE`, and `False.` are not the boolean you are looking for:
+
+```{python}
+#| eval: true
+#| error: true
+print(true)
+```
+
+Python has no idea what `true` is, so it assumes you meant a variable by that name and complains that no such variable exists.
+
+Equally important: `"True"` (with quotes) is a **string**, not a boolean. The quotes make it text, exactly like `"123"` was text and not the number `123`.
+
+```{python}
+#| eval: true
+print(type(True))
+print(type("True"))
+```
+:::
+
+Because they are keywords, you also cannot use `True` or `False` as variable names. Python will refuse:
+
+```{python}
+#| eval: true
+#| error: true
+True = 5
+```
+
+## 4.2: `bool()` and truthiness
+
+Just like `str()`, `int()`, and `float()`, there is a `bool()` function that converts a value into a boolean. And unlike `int()`, which is famously picky, `bool()` is happy to take absolutely anything you hand it. It never raises an error.
+
+The rule it uses is short enough to memorize: **a value is `False` if it is empty or zero, and `True` otherwise.**
+
+Here are the values that convert to `False`:
+
+```{python}
+#| eval: true
+print(bool(0))
+print(bool(0.0))
+print(bool(""))
+```
+
+That's essentially the whole list for the types you know so far: the integer zero, the float zero, and the empty string. Everything else is `True`:
+
+```{python}
+#| eval: true
+print(bool(1))
+print(bool(-7))
+print(bool(3.14))
+print(bool("hello"))
+```
+
+::: {.trap-band}
+**`bool("False")` is `True`!**
+
+This one feels deeply unfair the first time you see it, so let's stare at it directly:
+
+```{python}
+#| eval: true
+print(bool("False"))
+print(bool("0"))
+```
+
+Both come back `True`. Why? Because `bool()` on a string does not read the string and interpret its meaning. It only asks one question: *is this string empty?* `"False"` has five characters in it, so it is not empty, so it is `True`. Same for `"0"`, which is a one-character string.
+
+The only string that is `False` is the empty string, `""`.
+:::
+
+Values that convert to `True` are often called *truthy*, and values that convert to `False` are called *falsy*. This matters later, because when Python needs a `True`/`False` answer and you give it something else, it silently calls `bool()` on it for you.
+
+### 4.2.1: Casting a boolean into other types
+
+Booleans can be cast in the other direction too, and this reveals something interesting about how Python stores them under the hood:
+
+```{python}
+#| eval: true
+print(int(True))
+print(int(False))
+print(str(True))
+```
+
+`True` is `1` and `False` is `0`. This is not a coincidence or a party trick: Python genuinely treats booleans as a special kind of integer. Which means, alarmingly, that this works:
+
+```{python}
+#| eval: true
+print(True + True)
+```
+
+You will almost never want to write code like this. But it explains a genuinely useful pattern: if you ever need to *count* how many things are true, adding up booleans does exactly that.
+
+## 4.3: Comparison operators
+
+You will rarely type `True` or `False` by hand. Almost always, a boolean is *produced* for you as the answer to a comparison. That is what comparison operators do: they take two values, compare them, and hand back a `bool`.
+
+| Operator | Question It Asks | Example | Result |
+| --- | --- | --- | --- |
+| `==` | Are these equal? | `5 == 5` | `True` |
+| `!=` | Are these *not* equal? | `5 != 3` | `True` |
+| `>` | Is the left bigger? | `5 > 3` | `True` |
+| `<` | Is the left smaller? | `5 < 3` | `False` |
+| `>=` | Is the left bigger or equal? | `5 >= 5` | `True` |
+| `<=` | Is the left smaller or equal? | `3 <= 5` | `True` |
+
+Every one of these is an *expression* that evaluates down to a single boolean, exactly the way `2 + 3` evaluates down to a single integer:
+
+```{python}
+#| eval: true
+print(25 > 5)
+print(25 == 5)
+print(25 != 5)
+print(type(25 > 5))
+```
+
+And because the result is just a value, you can store it in a variable like anything else:
+
+```{python}
+#| eval: true
+score = 87
+passed = score >= 70
+print(passed)
+```
+
+### 4.3.1: `=` versus `==`
+
+::: {.trap-band}
+**One equals sign assigns. Two equals signs compare.**
+
+This is the single most common typo in all of introductory programming, and you will make it. The good news is that Python usually catches it loudly.
+
+```{python}
+x = 5      # ASSIGNMENT: put the value 5 into the variable x
+x == 5     # COMPARISON: ask "is x equal to 5?", produces True
+```
+
+Read `=` out loud as "gets" and `==` as "is equal to." So `x = 5` is "x gets 5," and `x == 5` is "is x equal to 5?"
+
+Using `=` where a comparison belongs is an error in Python:
+
+```{python}
+#| eval: true
+#| error: true
+age = 25
+print(age = 25)
+```
+:::
+
+### 4.3.2: Comparing across types
+
+Comparison operators work on strings as well as numbers, but *what* they compare changes with the type. With `==` and `!=`, comparing values of different types is allowed and simply comes back `False`, because a number is never equal to a piece of text:
+
+```{python}
+#| eval: true
+print(25 == "25")
+```
+
+This is the Day 3 lesson coming back around: `25` and `"25"` are different types, so they are not equal, no matter how similar they look on screen.
+
+Numbers do compare cleanly across `int` and `float`, because both are numbers:
+
+```{python}
+#| eval: true
+print(5 == 5.0)
+print(5.0 > 3)
+```
+
+Strings compare to other strings using *alphabetical* (technically, character-by-character) order, which is occasionally useful and occasionally surprising:
+
+```{python}
+#| eval: true
+print("apple" < "banana")
+print("Zebra" < "apple")
+```
+
+That second one catches people out. All uppercase letters sort before all lowercase letters, so `"Zebra"` really does come before `"apple"`.
+
+::: {.trap-band}
+**You cannot order a string against a number**
+
+Asking whether `"25"` is greater than `5` is a question Python refuses to answer, because it has no idea how to line text up against a number:
+
+```{python}
+#| eval: true
+#| error: true
+print("25" > 5)
+```
+
+Note the asymmetry: `==` across types is fine (it just says `False`), but `<`, `>`, `<=`, and `>=` across types crash. If you are comparing user input to a number, cast it first!
+:::
+
+### 4.3.3: Watch out for `==` on floats
+
+One more Day 3 callback. Remember that floats are not always perfectly precise:
+
+```{python}
+#| eval: true
+print(0.1 + 0.2)
+print(0.1 + 0.2 == 0.3)
+```
+
+The comparison comes back `False`, not because your logic is wrong but because `0.1 + 0.2` genuinely produces a number that is a hair away from `0.3`. The lesson: be careful about testing floats for exact equality. Comparing integers with `==` is perfectly safe.
+
+## 4.4: The big picture
+
+A boolean is the simplest data type in Python, and the most consequential. It has two values, `True` and `False`. Comparison operators are boolean *factories*: they take real data and boil it down to a single yes-or-no answer.
+
+Right now that answer just gets printed, which is not very exciting. But in the next two days we will learn how to *combine* those answers (`and`, `or`, `not`) and then how to make the program *act* on them (`if`, `elif`, `else`). Everything your programs do from here on out rests on this two-value type.

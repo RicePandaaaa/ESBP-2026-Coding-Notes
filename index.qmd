@@ -2,10 +2,17 @@
 title: "ENGR 102 Bridge - Review Sheets"
 ---
 
-### Week 1 — Python Foundations & the Evidence Habit
+### Week 1
 
 | Sheet | Topic | Lecture Number | Week, Day |
 |---|---|---|---|
 | [The humble line of code](week01/01_humble_line_of_code.qmd) | Assignment, variables, `print` | 1 | Week 1, Day 1 |
 | [Math and Modules](week01/02_basic_math.qmd) | Basic math operators and built-in modules | 2 | Week 1, Day 2 |
 | [Typecasting](week01/03_casting.qmd) | Type-casting and its rules | 3 | Week 1, Day 3 |
+| [Booleans](week01/04_booleans.qmd) | The `bool` type and comparison operators | 4 | Week 1, Day 4 |
+| [Logic Gates](week01/05_logic_gates.qmd) | `and`, `or`, `not`, and parentheses | 5 | Week 1, Day 5 |
+
+### Week 2
+| Sheet | Topic | Lecture Number | Week, Day |
+|---|---|---|---|
+| [Conditionals](week01/06_conditionals.qmd) | `if`, `elif`, `else`, and indentation | 6 | Week 2, Day 1 |

@@ -20,6 +20,14 @@ website:
             href: week01/02_basic_math.qmd
           - text: "Day 3 - Data Types and Typecasting"
             href: week01/03_casting.qmd
+          - text: "Day 4 - Booleans"
+            href: week01/04_booleans.qmd
+          - text: "Day 5 - Logic Gates"
+            href: week01/05_logic_gates.qmd
+      - text: "Week 2"
+        menu:
+          - text: "Day 6 - Conditionals"
+            href: week01/06_conditionals.qmd
 
 
 format:
